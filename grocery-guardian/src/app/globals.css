@@ -31,13 +31,3 @@ body {
   }
 }
 */
-
-.normalPage {
-  background-color: var(--green);
-  color: var(--white);
-}
-
-.signInTitle {
-  text-align: center;
-  
-}
