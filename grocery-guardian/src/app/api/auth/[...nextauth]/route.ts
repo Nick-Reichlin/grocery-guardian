@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
           }
         })
 
-        if (user) {
+        if (!user) {
           return null
         }
 
