@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function RegisterPage() {
   return (
-    <div className="h-screen w-screen flex justify-center items-center bg-green-300">
+    <div className="h-screen w-screen flex justify-center items-center bg-slate-200">
       <div className="shadow-xl px-8 py-8 bg-white rounded-xl space-y-12">
         <h1 className="font-semibold text-2xl">Create your Account</h1>
         <RegisterForm />
