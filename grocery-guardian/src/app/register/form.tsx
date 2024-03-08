@@ -1,5 +1,7 @@
 'use client'
 
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import React from "react"
 
 export const RegisterForm = () => {
@@ -10,9 +12,12 @@ export const RegisterForm = () => {
 
     return (
         <form>
-            <input />
-            <input />
-            <button>Register</button>
+            <div>
+                <Input />
+            </div>
+            
+            <Input />
+            <Button>Register</Button>
         </form>
     )
 }
