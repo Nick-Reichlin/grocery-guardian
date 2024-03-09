@@ -3,12 +3,14 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Alert } from "@/components/ui/alert"
 import { signIn } from "next-auth/react"
 import React from "react"
 
 export const RegisterForm = () => {
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const [error, setError] = React.useState<string | null>(null)
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -25,8 +27,11 @@ export const RegisterForm = () => {
             })
             if(res.ok) {
                 signIn()
+            } else {
+                setError((await res.json()).error)
             }
-        } catch (error) {
+        } catch (error: any) {
+            setError(error?.message)
             console.error(error)
         }
 
@@ -34,8 +39,8 @@ export const RegisterForm = () => {
     }
 
     return (
-        <form onSubmit={onSubmit} className='space-y-12 w-[400px]'>
-            <div className="grid w-full max-w-sm items-center gap-1.5">
+        <form onSubmit={onSubmit} className='space-y-12 w-full sm:w-[400px]'>
+            <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor='email'>Email</Label>
                 <Input
                     required
@@ -47,7 +52,7 @@ export const RegisterForm = () => {
                 />
             </div>
             
-            <div className="grid w-full max-w-sm items-center gap-1.5">
+            <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor='password'>Password</Label>
                 <Input
                     required
@@ -57,6 +62,7 @@ export const RegisterForm = () => {
                     type="password"
                 />
             </div>
+            {error && <Alert>{error}</Alert>}
             <div className="w-full">
                 <Button className='w-full bg-green-800 hover:bg-green-400' size="lg">Register</Button>
             </div>
