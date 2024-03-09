@@ -6,8 +6,11 @@ import { Label } from "@/components/ui/label"
 import { Alert } from "@/components/ui/alert"
 import React from "react"
 import { signIn } from "next-auth/react"
+import { useSearchParams } from "next/navigation"
 
 export const LoginForm = () => {
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get('callbackUrl') || '/';
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [error, setError] = React.useState<string | null>(null)
@@ -17,7 +20,7 @@ export const LoginForm = () => {
         signIn('credentials',{
             email,
             password,
-            callbackUrl:'/'
+            callbackUrl
         })
         console.log("Login!")
     }
