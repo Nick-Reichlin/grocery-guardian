@@ -6,23 +6,31 @@ import { Label } from "@/components/ui/label"
 import { Alert } from "@/components/ui/alert"
 import React from "react"
 import { signIn } from "next-auth/react"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
 export const LoginForm = () => {
+    const router = useRouter()
     const searchParams = useSearchParams();
     const callbackUrl = searchParams.get('callbackUrl') || '/';
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
-    const [error, setError] = React.useState<string | null>(null)
+    const [error, SetError] = React.useState('')
 
-    const onSubmit = (e: React.FormEvent) => {
+    const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        signIn('credentials',{
-            email,
-            password,
-            callbackUrl
-        })
-        console.log("Login!")
+        try {
+            const res = await signIn('credentials',{
+                redirect: false,
+                email,
+                password,
+                callbackUrl
+            })
+            if (!res?.error) {
+                router.push(callbackUrl)
+            } else {
+                SetError('Invalid email or password')
+            }
+        } catch (err: any) {}        
     }
     return(
         <form onSubmit={onSubmit} className='space-y-12 w-full sm:w-[400px]'>
