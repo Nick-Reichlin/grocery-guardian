@@ -16,7 +16,8 @@ export const LoginForm = () => {
         e.preventDefault()
         signIn('credentials',{
             email,
-            password
+            password,
+            callbackUrl:'/'
         })
         console.log("Login!")
     }
@@ -28,7 +29,7 @@ export const LoginForm = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    id='email' 
+                    id='email'
                     type="email" 
                     placeholder="johnsmith@smth.com"
                 />
