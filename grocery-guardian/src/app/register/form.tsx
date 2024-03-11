@@ -10,6 +10,7 @@ import React from "react"
 export const RegisterForm = () => {
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const [name, setName] = React.useState('')
     const [error, setError] = React.useState<string | null>(null)
 
     const onSubmit = async (e: React.FormEvent) => {
@@ -19,7 +20,7 @@ export const RegisterForm = () => {
             const res = await fetch('/api/register', {
                 method: 'POST',
                 body: JSON.stringify({
-                    email, password
+                    email, password, name
                 }),
                 headers: {
                     'Content-Type': 'application/json'
@@ -62,6 +63,18 @@ export const RegisterForm = () => {
                     type="password"
                 />
             </div>
+
+            <div className="grid w-full items-center gap-1.5">
+                <Label htmlFor='name'>Name</Label>
+                <Input
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    id='name'
+                    type="name"
+                />
+            </div>
+
             {error && <Alert>{error}</Alert>}
             <div className="w-full">
                 <Button className='w-full bg-green-800 hover:bg-green-400' size="lg">Register</Button>
