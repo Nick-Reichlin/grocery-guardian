@@ -48,8 +48,7 @@ export const authOptions: NextAuthOptions = {
         return {
           id: user.id + '',
           email: user.email,
-          name: user.name,
-          randomKey: 'Hey cool'
+          name: user.name
         }
 
       }
@@ -62,8 +61,7 @@ export const authOptions: NextAuthOptions = {
         ...session,
         user: {
           ...session.user,
-          id: token.id,
-          randomKey: token.randomKey
+          id: token.id
         }
       }
     },
@@ -74,7 +72,6 @@ export const authOptions: NextAuthOptions = {
         return {
           ...token,
           id: u.id,
-          randomKey: u.randomKey
         }
       }
       return token
