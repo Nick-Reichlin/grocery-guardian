@@ -1,6 +1,7 @@
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { LogoutButton } from "@/app/auth"
 
 const Navbar = () => {
     return (
@@ -19,15 +20,17 @@ const Navbar = () => {
                 <div>
                     <ul className="hidden sm:flex">
                         <Link href="/inventory">
-                            <li className="ml-10 hover:border-b text-xl">Inventory</li>
+                            <li className="ml-10 hover:border-b text-green-600 text-xl">Inventory</li>
                         </Link>
                         <Link href="/grocery-lists">
-                            <li className="ml-10 hover:border-b text-xl">Grocery Lists</li>
+                            <li className="ml-10 hover:border-b text-green-600 text-xl">Grocery Lists</li>
                         </Link>
                         <Link href="/profile">
-                            <li className="ml-10 hover:border-b text-xl">Profile</li>
+                            <li className="ml-10 hover:border-b text-green-600 text-xl">Profile</li>
                         </Link>
-
+                        <li className="ml-10 hover:border-b text-green-600 text-xl">
+                            <LogoutButton />
+                        </li>
                     </ul>
                 </div>
             </div>
