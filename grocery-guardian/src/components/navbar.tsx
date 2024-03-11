@@ -5,7 +5,7 @@ import { LogoutButton } from "@/app/auth"
 
 const Navbar = () => {
     return (
-        <nav className="fixed w-full h-12 shadow-xl">
+        <nav className="fixed w-full h-12 shadow-xl bg-white">
             <div className="flex justify-between items-center h-full w-full px-8 2xl:px-16">
                 <Link href='/'>
                     <Image 
