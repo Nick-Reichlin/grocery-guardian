@@ -16,7 +16,20 @@ const Navbar = () => {
                         priority
                     />
                 </Link>
-                <div>right</div>
+                <div>
+                    <ul className="hidden sm:flex">
+                        <Link href="/inventory">
+                            <li className="ml-10 hover:border-b text-xl">Inventory</li>
+                        </Link>
+                        <Link href="/grocery-lists">
+                            <li className="ml-10 hover:border-b text-xl">Grocery Lists</li>
+                        </Link>
+                        <Link href="/profile">
+                            <li className="ml-10 hover:border-b text-xl">Profile</li>
+                        </Link>
+
+                    </ul>
+                </div>
             </div>
         </nav>
     )
