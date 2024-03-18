@@ -21,7 +21,10 @@ export default async function Home() {
           <p className="text-lg text-center mt-4 text-green-800">
             Your solution for managing grocery inventory and reducing food waste. <br /><br />
 
-            GroceryGuardian's mission is to empower individuals to make more sustainable and mindful choices about their groceries, ultimately reducing food waste. We believe that by providing tools to easily manage grocery inventory, track expiration dates, and plan shopping lists efficiently, we can make a significant impact on reducing the amount of food that goes to waste. Our goal is to create a community of conscious consumers who are actively contributing to a more sustainable future for our planet.
+            
+GroceryGuardian's mission is inspired by the alarming facts surrounding food waste. Did you know that roughly one-third of the food produced in the world for human consumption every year—approximately 1.3 billion tons—gets lost or wasted? This not only impacts food security and the economy but also contributes significantly to environmental degradation. <br/><br/>
+According to the Food and Agriculture Organization of the United Nations (FAO), food waste is a major contributor to greenhouse gas emissions, with wasted food generating about 8% of global greenhouse gas emissions. Additionally, wasted food occupies about 1.4 billion hectares of land—28% of the world's agricultural area.<br/><br/>
+At GroceryGuardian, we aim to address these issues by helping individuals manage their groceries more efficiently, reduce waste, and contribute to a more sustainable future. <span className="text-green-600">Join us in our mission to make a positive impact on our planet—one grocery list at a time.</span>
           </p>
         </div>
       </div>
