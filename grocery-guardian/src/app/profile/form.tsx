@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert } from "@/components/ui/alert"
-import React from "react"
+import React, { useEffect } from "react"
 
 export const ProfileForm = () => {
     const [email, setEmail] = React.useState('')
@@ -12,6 +12,32 @@ export const ProfileForm = () => {
     const [name, setName] = React.useState('')
     const [error, setError] = React.useState<string | null>(null)
     
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const res = await fetch('/api/profile', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                if (res.ok) {
+                    const { user } = await res.json()
+                    setEmail(user.email)
+                    setName(user.name)
+                } else {
+                    setError((await res.json()).error)
+                }
+            } catch (error: any) {
+                setError("An error occurred while fetching your profile")
+                console.error(error)
+            }
+        }
+
+        fetchUser()
+    }, [])
+
+
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
@@ -52,7 +78,6 @@ export const ProfileForm = () => {
             <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor='password'>Password</Label>
                 <Input
-                    required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     id='password'
@@ -63,7 +88,6 @@ export const ProfileForm = () => {
             <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor='name'>Name</Label>
                 <Input
-                    required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     id='name'
