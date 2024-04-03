@@ -11,7 +11,7 @@ export const ProfileForm = () => {
     const [password, setPassword] = React.useState('')
     const [name, setName] = React.useState('')
     const [error, setError] = React.useState<string | null>(null)
-
+    
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
@@ -42,11 +42,10 @@ export const ProfileForm = () => {
                 <Label htmlFor='email'>Email</Label>
                 <Input
                     required
-                    value={email}
+                    defaultValue=""
                     onChange={(e) => setEmail(e.target.value)}
                     id='email' 
                     type="email" 
-                    placeholder="johnsmith@smth.com"
                 />
             </div>
             
