@@ -5,29 +5,34 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert } from "@/components/ui/alert"
 import React, { useEffect } from "react"
+import { useSession } from "next-auth/react";
 
 export const ProfileForm = () => {
     const [email, setEmail] = React.useState('')
     const [name, setName] = React.useState('')
     const [error, setError] = React.useState<string | null>(null)
-    
+
+    const { data: session } = useSession();
+
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await fetch(`/api/profile?email=1234@gmail.com`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
+                if (session) {
+                    const res = await fetch(`/api/profile?email=${session?.user?.email}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
     
-                if (res.ok) {
-                    const { user } = await res.json()
-                    setEmail(user.email)
-                    setName(user.name)
-                } else {
-                    const errorResponse = await res.json();
-                    throw new Error(errorResponse.error || 'Failed to fetch user data');
+                    if (res.ok) {
+                        const { user } = await res.json();
+                        setEmail(user.email);
+                        setName(user.name);
+                    } else {
+                        const errorResponse = await res.json();
+                        throw new Error(errorResponse.error || 'Failed to fetch user data');
+                    }
                 }
             } catch (error: any) {
                 setError(error.message || 'An error occurred while fetching your profile');
@@ -35,8 +40,10 @@ export const ProfileForm = () => {
             }
         };
     
-        fetchUser();
-    }, []);
+        if (session) {
+            fetchUser();
+        }
+    }, [session]);
     
 
 
