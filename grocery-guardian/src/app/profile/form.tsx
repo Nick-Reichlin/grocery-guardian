@@ -8,14 +8,13 @@ import React, { useEffect } from "react"
 
 export const ProfileForm = () => {
     const [email, setEmail] = React.useState('')
-    const [password, setPassword] = React.useState('')
     const [name, setName] = React.useState('')
     const [error, setError] = React.useState<string | null>(null)
     
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await fetch(`/api/profile?email=nickreichlin@gmail.com`, {
+                const res = await fetch(`/api/profile?email=1234@gmail.com`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
@@ -48,7 +47,7 @@ export const ProfileForm = () => {
             const res = await fetch('/api/profile', {
                 method: 'POST',
                 body: JSON.stringify({
-                    email, password, name
+                    email, name
                 }),
                 headers: {
                     'Content-Type': 'application/json'
@@ -86,16 +85,6 @@ export const ProfileForm = () => {
                     onChange={(e) => setName(e.target.value)}
                     id='name'
                     type="name"
-                />
-            </div>
-
-            <div className="grid w-full items-center gap-1.5">
-                <Label htmlFor='password'>New Password</Label>
-                <Input
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    id='password'
-                    type="password"
                 />
             </div>
 

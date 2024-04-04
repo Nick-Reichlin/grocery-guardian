@@ -1,11 +1,9 @@
-import { hash } from "bcrypt"
 import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
     try {
-        const { email, password, name } = await req.json()
-        const hashed = await hash(password, 12)
+        const { email, name } = await req.json()
 
         // Find the user by email
         const existingUser = await prisma.user.findUnique({
@@ -21,7 +19,6 @@ export async function POST(req: Request) {
                     email: email
                 },
                 data: {
-                    password: hashed,
                     name: name
                 }
             })
