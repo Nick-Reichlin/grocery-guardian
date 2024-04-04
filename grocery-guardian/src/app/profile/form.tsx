@@ -11,6 +11,7 @@ export const ProfileForm = () => {
     const [email, setEmail] = React.useState('')
     const [name, setName] = React.useState('')
     const [error, setError] = React.useState<string | null>(null)
+    const [success, setSuccess] = React.useState<boolean>(false)
 
     const { data: session } = useSession();
 
@@ -44,8 +45,6 @@ export const ProfileForm = () => {
             fetchUser();
         }
     }, [session]);
-    
-
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -61,7 +60,8 @@ export const ProfileForm = () => {
                 }
             })
             if(res.ok) {
-
+                setSuccess(true);
+                setError(null);
             } else {
                 setError((await res.json()).error)
             }
@@ -96,6 +96,7 @@ export const ProfileForm = () => {
             </div>
 
             {error && <Alert>{error}</Alert>}
+            {success && <div className="bg-green-200 text-green-800 p-4 rounded-md">Profile updated successfully!</div>}
             <div className="w-full">
                 <Button className='w-full bg-green-800 hover:bg-green-400' size="lg">Update</Button>
             </div>
