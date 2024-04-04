@@ -49,49 +49,46 @@ export async function POST(req: Request) {
     }
 }
 
-async function GET(req: Request) {
+export async function GET(req: any, res: any) {
     try {
-        const body = await req.json()
+        const url = new URL(req.url, 'http://localhost')
+        const email = url.searchParams.get('email')
 
-        if (!body || Object.keys(body).length === 0) {
+        if (!email) {
             return new NextResponse(JSON.stringify({
-                error: "Request body is empty"
-            }),
-            {
+                error: "Email parameter is missing"
+            }), {
                 status: 400
             })
         }
 
-        const { email } = body
-
         // Find the user by email
         const user = await prisma.user.findUnique({
             where: {
-                email: email
+                email: email.toString()
             }
         })
 
         if (!user) {
             return new NextResponse(JSON.stringify({
                 error: "User not found"
-            }),
-            {
+            }), {
                 status: 404
             })
         }
 
-        return NextResponse.json({
+        return new NextResponse(JSON.stringify({
             user: {
                 email: user.email,
                 name: user.name,
-                // Add any other fields you want to include in the response
             }
+        }), {
+            status: 200
         })
     } catch (err: any) {
         return new NextResponse(JSON.stringify({
             error: err.message
-        }),
-        {
+        }), {
             status: 500
         })
     }

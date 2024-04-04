@@ -15,27 +15,30 @@ export const ProfileForm = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await fetch('/api/profile', {
+                const res = await fetch(`/api/profile?email=nickreichlin@gmail.com`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 })
+    
                 if (res.ok) {
                     const { user } = await res.json()
                     setEmail(user.email)
                     setName(user.name)
                 } else {
-                    setError((await res.json()).error)
+                    const errorResponse = await res.json();
+                    throw new Error(errorResponse.error || 'Failed to fetch user data');
                 }
             } catch (error: any) {
-                setError("An error occurred while fetching your profile")
-                console.error(error)
+                setError(error.message || 'An error occurred while fetching your profile');
+                console.error(error);
             }
-        }
-
-        fetchUser()
-    }, [])
+        };
+    
+        fetchUser();
+    }, []);
+    
 
 
     const onSubmit = async (e: React.FormEvent) => {
@@ -68,20 +71,11 @@ export const ProfileForm = () => {
                 <Label htmlFor='email'>Email</Label>
                 <Input
                     required
-                    defaultValue=""
+                    defaultValue={email}
                     onChange={(e) => setEmail(e.target.value)}
                     id='email' 
-                    type="email" 
-                />
-            </div>
-            
-            <div className="grid w-full items-center gap-1.5">
-                <Label htmlFor='password'>Password</Label>
-                <Input
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    id='password'
-                    type="password"
+                    type="email"
+                    readOnly
                 />
             </div>
 
@@ -92,6 +86,16 @@ export const ProfileForm = () => {
                     onChange={(e) => setName(e.target.value)}
                     id='name'
                     type="name"
+                />
+            </div>
+
+            <div className="grid w-full items-center gap-1.5">
+                <Label htmlFor='password'>New Password</Label>
+                <Input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    id='password'
+                    type="password"
                 />
             </div>
 
