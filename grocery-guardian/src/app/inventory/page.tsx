@@ -6,9 +6,10 @@ export default function RegisterPage() {
     <main>
       <Navbar />
       <div className="h-screen w-screen flex justify-center bg-no-repeat items-center bg-emerald-100">
-        <div className="sm:shadow-xl px-8 py-8 sm:bg-white rounded-xl space-y-12">
-            <h1>Inventory</h1>
-        </div>
+        <h1 className=" absolute text-3xl font-bold text-center text-gray-800 mb-8">
+          Inventory
+        </h1>
+        <div className="w-11/12 h-[90vh] sm:shadow-xl bg-white rounded-xl p-8 mt-10"></div>
       </div>
     </main>
   );

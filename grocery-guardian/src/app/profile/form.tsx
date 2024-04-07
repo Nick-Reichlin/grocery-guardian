@@ -73,6 +73,7 @@ export const ProfileForm = () => {
 
     return (
         <form onSubmit={onSubmit} className='space-y-12 w-full sm:w-[400px]'>
+            <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Profile Information</h1>
             <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor='email'>Email</Label>
                 <Input
