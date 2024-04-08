@@ -13,39 +13,6 @@ export const InventoryForm = () => {
   const [error, setError] = React.useState<string | null>(null);
   const [success, setSuccess] = React.useState<boolean>(false);
 
-  // const { data: session } = useSession();
-
-  // useEffect(() => {
-  //     const fetchUser = async () => {
-  //         try {
-  //             if (session) {
-  //                 const res = await fetch(`/api/profile?email=${session?.user?.email}`, {
-  //                     method: 'GET',
-  //                     headers: {
-  //                         'Content-Type': 'application/json'
-  //                     }
-  //                 });
-
-  //                 if (res.ok) {
-  //                     const { user } = await res.json();
-  //                     setEmail(user.email);
-  //                     setName(user.name);
-  //                 } else {
-  //                     const errorResponse = await res.json();
-  //                     throw new Error(errorResponse.error || 'Failed to fetch user data');
-  //                 }
-  //             }
-  //         } catch (error: any) {
-  //             setError(error.message || 'An error occurred while fetching your profile');
-  //             console.error(error);
-  //         }
-  //     };
-
-  //     if (session) {
-  //         fetchUser();
-  //     }
-  // }, [session]);
-
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
