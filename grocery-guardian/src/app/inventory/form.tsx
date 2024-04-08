@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Alert } from "@/components/ui/alert";
-import React, { useEffect } from "react";
+import React from "react";
 import { useSession } from "next-auth/react";
 
 export const InventoryForm = () => {
@@ -11,6 +11,8 @@ export const InventoryForm = () => {
   const [name, setName] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
   const [success, setSuccess] = React.useState<boolean>(false);
+
+  const { data: session } = useSession();
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ export const InventoryForm = () => {
         body: JSON.stringify({
           name,
           quantity,
+          userId: session?.user?.email,
         }),
         headers: {
           "Content-Type": "application/json",

@@ -27,6 +27,6 @@ model FoodItem {
   quantity      Int
   expirationDate DateTime
   createdAt     DateTime @default(now())
-  userId        Int   @unique
-  user          User     @relation(fields: [userId], references: [id])
+  userEmail        String   @unique
+  user          User     @relation(fields: [userEmail], references: [email])
 }
