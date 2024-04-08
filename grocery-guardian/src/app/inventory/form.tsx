@@ -2,13 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Alert } from "@/components/ui/alert";
 import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 export const InventoryForm = () => {
-  const [email, setEmail] = React.useState("");
+  const [quantity, setQuantity] = React.useState("");
   const [name, setName] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
   const [success, setSuccess] = React.useState<boolean>(false);
@@ -20,8 +19,8 @@ export const InventoryForm = () => {
       const res = await fetch("/api/profile", {
         method: "POST",
         body: JSON.stringify({
-          email,
           name,
+          quantity,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -51,10 +50,9 @@ export const InventoryForm = () => {
               <Input
                 placeholder="Food Item Name"
                 required
-                defaultValue={email}
-                onChange={(e) => setEmail(e.target.value)}
-                id="email"
-                type="email"
+                onChange={(e) => setName(e.target.value)}
+                id="name"
+                type="name"
               />
             </div>
           </div>
@@ -62,10 +60,9 @@ export const InventoryForm = () => {
             <div className="my-2 p-2 bg-white flex">
               <Input
                 placeholder="Quantity"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                id="name"
-                type="name"
+                onChange={(e) => setQuantity(e.target.value)}
+                id="quantity"
+                type="number"
               />
             </div>
           </div>
