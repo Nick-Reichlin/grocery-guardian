@@ -1,11 +1,9 @@
 import React from "react";
 import Navbar from "@/components/navbar";
 import { InventoryForm } from "./form";
-import { authOptions } from "../api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
+import InvenetoryTable from "@/components/inventoryTable";
 
 export default async function RegisterPage() {
-  const session = await getServerSession(authOptions)
   return (
     <main>
       <Navbar />
@@ -15,7 +13,7 @@ export default async function RegisterPage() {
             Inventory
             </h1>
             <InventoryForm/>
-            
+            <InvenetoryTable/>
         </div>
       </div>
     </main>
