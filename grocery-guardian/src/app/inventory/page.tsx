@@ -15,6 +15,7 @@ export default async function RegisterPage() {
             Inventory
             </h1>
             <InventoryForm/>
+            
         </div>
       </div>
     </main>

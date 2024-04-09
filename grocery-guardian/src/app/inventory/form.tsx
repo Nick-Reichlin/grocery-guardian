@@ -59,33 +59,32 @@ export const InventoryForm = () => {
               />
             </div>
           </div>
-          <div className="w-full flex-1 mx-2">
-            <div className="my-2 p-2 bg-white flex">
-              <Input
-                placeholder="Quantity"
-                required
-                onChange={(e) => setQuantity(e.target.value)}
-                id="quantity"
-                type="number"
-              />
-            </div>
+        <div className="w-full flex-1 mx-2">
+          <div className="my-2 p-2 bg-white flex">
+            <Input
+              placeholder="Quantity"
+              required
+              onChange={(e) => setQuantity(e.target.value)}
+              id="quantity"
+              type="number"
+            />
           </div>
         </div>
-        <div className="w-full flex-1 mx-2">
-            <div className="my-2 p-2 bg-white flex">
-                <Button className="bg-green-800 hover:bg-green-400" size="lg">
-                Add item
-                </Button>
-            </div>
       </div>
+      <div className="w-full flex-1 mx-2">
+          <div className="my-2 p-2 bg-white flex">
+              <Button className="bg-green-800 hover:bg-green-400" size="lg">
+              Add item
+              </Button>
+          </div>
       </div>
-
-      {error && <Alert>{error}</Alert>}
-      {success && (
-        <div className="bg-green-200 text-green-800 p-1 rounded-md mt-1">
-          Grocery item added!
-        </div>
-      )}
-    </form>
-  );
+    </div>
+    {error && <Alert>{error}</Alert>}
+        {success && (
+          <div className="bg-green-200 text-green-800 p-3 rounded-md mt-0">
+            Grocery item added!
+          </div>
+        )}
+  </form>
+);
 };
