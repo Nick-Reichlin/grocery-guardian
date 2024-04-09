@@ -2,8 +2,19 @@ import React from "react";
 import Navbar from "@/components/navbar";
 import { InventoryForm } from "./form";
 import InvenetoryTable from "@/components/inventoryTable";
+import { FoodItem } from './columns'
+
+async function getFoodItems(): Promise<FoodItem[]> {
+  const res = await fetch(
+    ''
+  )
+  const data = await res.json()
+  return data
+}
 
 export default async function InventoryPage() {
+  const FoodItems = await getFoodItems()
+
   return (
     <main>
       <Navbar />
@@ -13,7 +24,7 @@ export default async function InventoryPage() {
             Inventory
             </h1>
             <InventoryForm/>
-            <InvenetoryTable/>
+            <InvenetoryTable FoodItems={FoodItems}/>
         </div>
       </div>
     </main>
