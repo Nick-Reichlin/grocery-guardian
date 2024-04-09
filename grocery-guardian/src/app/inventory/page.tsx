@@ -3,7 +3,7 @@ import Navbar from "@/components/navbar";
 import { InventoryForm } from "./form";
 import InvenetoryTable from "@/components/inventoryTable";
 
-export default async function RegisterPage() {
+export default async function InventoryPage() {
   return (
     <main>
       <Navbar />
