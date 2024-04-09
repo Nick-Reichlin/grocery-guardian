@@ -1,6 +1,7 @@
 'use client'
 
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue} from "@nextui-org/react";
+import { columns } from "@/app/inventory/columns"
 
 const rows = [
   {
@@ -26,25 +27,6 @@ const rows = [
     name: "William Howard",
     role: "Community Manager",
     status: "Vacation",
-  },
-];
-
-const columns = [
-  {
-    key: "name",
-    label: "NAME",
-  },
-  {
-    key: "quantity",
-    label: "Quantity",
-  },
-  {
-    key: "expirationDate",
-    label: "EXPIRATION DATE",
-  },
-  {
-    key: "createdDate",
-    label: "DATE CREATED",
   },
 ];
 
