@@ -18,12 +18,12 @@ export const InventoryForm = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/profile", {
+      const res = await fetch("/api/inventory", {
         method: "POST",
         body: JSON.stringify({
           name,
           quantity,
-          userId: session?.user?.email,
+          userId: session?.user?.id,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -63,6 +63,7 @@ export const InventoryForm = () => {
             <div className="my-2 p-2 bg-white flex">
               <Input
                 placeholder="Quantity"
+                required
                 onChange={(e) => setQuantity(e.target.value)}
                 id="quantity"
                 type="number"
@@ -81,8 +82,8 @@ export const InventoryForm = () => {
 
       {error && <Alert>{error}</Alert>}
       {success && (
-        <div className="bg-green-200 text-green-800 p-4 rounded-md">
-          Profile updated successfully!
+        <div className="bg-green-200 text-green-800 p-1 rounded-md mt-1">
+          Grocery item added!
         </div>
       )}
     </form>

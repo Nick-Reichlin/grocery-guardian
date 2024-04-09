@@ -1,8 +1,11 @@
 import React from "react";
 import Navbar from "@/components/navbar";
 import { InventoryForm } from "./form";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 
-export default function RegisterPage() {
+export default async function RegisterPage() {
+  const session = await getServerSession(authOptions)
   return (
     <main>
       <Navbar />

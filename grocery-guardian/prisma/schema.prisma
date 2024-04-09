@@ -18,15 +18,15 @@ model User {
   email  String   @unique
   password  String
   name String?
-  foodItems FoodItem[]
+  foodItems foodItem[]
 }
 
-model FoodItem {
+model foodItem {
   id            Int      @id @default(autoincrement())
   name          String
   quantity      Int
-  expirationDate DateTime
+  expirationDate DateTime?
   createdAt     DateTime @default(now())
-  userEmail        String   @unique
-  user          User     @relation(fields: [userEmail], references: [email])
+  user          User     @relation(fields: [userID], references: [id])
+  userID        Int
 }
