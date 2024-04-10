@@ -5,8 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Alert } from "@/components/ui/alert";
 import React from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export const InventoryForm = () => {
+  // const router = useRouter();
+
   const [quantity, setQuantity] = React.useState("");
   const [name, setName] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
@@ -32,6 +35,7 @@ export const InventoryForm = () => {
       if (res.ok) {
         setSuccess(true);
         setError(null);
+        // router.refresh();
       } else {
         setError((await res.json()).error);
       }
