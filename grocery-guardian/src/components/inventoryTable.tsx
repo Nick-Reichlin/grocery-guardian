@@ -35,13 +35,13 @@ export default function InventoryTable() {
   const FoodItems = getFoodItems(session?.user?.id);
     
   return (
-    <Table isStriped>
+    <Table >
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key} className='text-center'>{column.label}</TableColumn>}
       </TableHeader>
       <TableBody emptyContent={"No rows to display."} items={FoodItems}>
         {(item) => (
-          <TableRow key={item.id}>
+          <TableRow key={item.id} className="hover:bg-gray-100">
             {(columnKey) => <TableCell className='text-center'>{getKeyValue(item, columnKey)}</TableCell>}
           </TableRow>
         )}
