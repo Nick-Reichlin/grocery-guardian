@@ -42,7 +42,8 @@ export default function InventoryTable() {
       <TableBody emptyContent={"No rows to display."} items={FoodItems}>
         {(item) => (
           <TableRow key={item.id} className="hover:bg-gray-100">
-            {(columnKey) => <TableCell className='text-center'>{getKeyValue(item, columnKey)}</TableCell>}
+            {(columnKey) => <TableCell className='text-center'>{columnKey === 'expirationDate'|| columnKey === 'createdAt' ? new Date(getKeyValue(item, columnKey)).toLocaleDateString() : getKeyValue(item, columnKey)}
+</TableCell>}
           </TableRow>
         )}
       </TableBody>
