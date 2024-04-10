@@ -4,7 +4,7 @@ export type FoodItem = {
     quantity: number
     expirationDate: Date
     createdAt: Date
-    userId: number
+    userID: number
 }
 
 export const columns = [
@@ -21,7 +21,7 @@ export const columns = [
       label: "EXPIRATION DATE",
     },
     {
-      key: "createdDate",
+      key: "createdAt",
       label: "DATE CREATED",
     },
   ];

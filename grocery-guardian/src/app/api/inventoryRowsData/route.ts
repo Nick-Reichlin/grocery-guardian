@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 
-export default async function GET(req: any, res: any) {
+export async function GET(req: any, res: any) {
     try {
         console.log("In API")
 
