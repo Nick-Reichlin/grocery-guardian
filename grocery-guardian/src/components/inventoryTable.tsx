@@ -21,26 +21,28 @@ function getFoodItems(userID: unknown) {
         console.error('Error fetching food items:', error);
       }
     }
-
+    if (userID) {
+      fetchFoodItems();
+    }
     fetchFoodItems();
-  }, [userID]); // Add userID as a dependency to useEffect
+  }, [userID]);
 
   return foodItems;
 }
 
-export default  function InventoryTable() {
+export default function InventoryTable() {
   const { data: session } = useSession();
   const FoodItems = getFoodItems(session?.user?.id);
     
   return (
-    <Table>
+    <Table isStriped>
       <TableHeader columns={columns}>
-        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
+        {(column) => <TableColumn key={column.key} className='text-center'>{column.label}</TableColumn>}
       </TableHeader>
-      <TableBody items={FoodItems}>
+      <TableBody emptyContent={"No rows to display."} items={FoodItems}>
         {(item) => (
           <TableRow key={item.id}>
-            {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
+            {(columnKey) => <TableCell className='text-center'>{getKeyValue(item, columnKey)}</TableCell>}
           </TableRow>
         )}
       </TableBody>
