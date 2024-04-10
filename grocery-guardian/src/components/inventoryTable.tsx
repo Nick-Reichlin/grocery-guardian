@@ -1,7 +1,7 @@
 'use client'
 
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue} from "@nextui-org/react";
-import { FoodItem, columns } from "@/app/inventory/columns"
+import { columns } from "@/app/inventory/columns"
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
