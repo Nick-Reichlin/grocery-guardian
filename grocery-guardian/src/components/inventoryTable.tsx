@@ -139,7 +139,7 @@ export default function InventoryTable() {
           />
         </div>
       }
-      bottomContentPlacement='outside'
+      //bottomContentPlacement='outside'
       sortDescriptor={sortDescriptor}
       onSortChange={setSortDescriptor}
       classNames={{
