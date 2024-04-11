@@ -1,7 +1,7 @@
 'use client'
 
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue} from "@nextui-org/react";
-import { columns } from "@/app/inventory/columns"
+import { columns, renderCell } from "@/app/inventory/columns"
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
@@ -42,7 +42,7 @@ export default function InventoryTable() {
       <TableBody emptyContent={"No rows to display."} items={FoodItems}>
         {(item) => (
           <TableRow key={item.id} className="hover:bg-gray-100">
-            {(columnKey) => <TableCell className='text-center'>{columnKey === 'expirationDate'|| columnKey === 'createdAt' ? new Date(getKeyValue(item, columnKey)).toLocaleDateString() : getKeyValue(item, columnKey)}
+            {(columnKey) => <TableCell className='text-center'>{renderCell(item, columnKey)}
 </TableCell>}
           </TableRow>
         )}
