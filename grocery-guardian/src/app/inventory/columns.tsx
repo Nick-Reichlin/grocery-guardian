@@ -24,4 +24,8 @@ export const columns = [
       key: "createdAt",
       label: "DATE CREATED",
     },
+    {
+      key:"actions",
+      label: "ACTIONS",
+    }
   ];
