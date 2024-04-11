@@ -68,8 +68,8 @@ export default function InventoryTable() {
         <div className="flex w-full justify-center">
           <Pagination
             isCompact
-            showControls
-            showShadow
+            //showControls
+            //showShadow
             color="secondary"
             page={page}
             total={pages}
