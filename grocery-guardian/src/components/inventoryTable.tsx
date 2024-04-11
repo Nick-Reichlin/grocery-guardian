@@ -149,7 +149,7 @@ export default function InventoryTable() {
       <TableHeader columns={columns}>
         {(column) => 
           <TableColumn key={column.key} 
-            {...(column.key === 'name' ? { allowsSorting: true } : {})}
+            {...(column.key !== 'actions' ? { allowsSorting: true } : {})}
             className='text-center'>
               {column.label} 
           </TableColumn>}
