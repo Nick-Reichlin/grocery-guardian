@@ -53,6 +53,10 @@ export const columns = [
           return (
             <span>{new Date(cellValue).toLocaleDateString()}</span>
           )
+        case "createdAt":
+          return (
+            <span>{new Date(cellValue).toLocaleDateString()}</span>
+          )
         case "actions":
           return (
             <div className="flex items-center gap-2">
