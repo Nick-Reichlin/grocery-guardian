@@ -35,44 +35,21 @@ function getFoodItems(userID: unknown) {
 export default function InventoryTable() {
   const { data: session } = useSession();
   const FoodItems = getFoodItems(session?.user?.id);
-  
-  // const [page, setPage] = useState(1);
-  // const rowsPerPage = 8;
-
-  // const pages = Math.ceil(FoodItems.length / rowsPerPage);
-
-  // const items = useMemo(() => {
-  //   const start = (page - 1) * rowsPerPage;
-  //   const end = start + rowsPerPage;
-
-  //   return FoodItems.slice(start, end);
-  // }, [page, FoodItems]);
 
   const [filterValue, setFilterValue] = useState('')
   const hasSearchFilter = Boolean(filterValue)
 
   const filteredItems = useMemo(() => {
-    let filteredUsers = [...FoodItems]
+    let filteredFood = [...FoodItems]
 
     if (hasSearchFilter) {
-      filteredUsers = filteredUsers.filter(user =>
-        user.name.toLowerCase().includes(filterValue.toLowerCase())
+      filteredFood = filteredFood.filter(item =>
+        item.name.toLowerCase().includes(filterValue.toLowerCase())
       )
     }
 
-    return filteredUsers
+    return filteredFood
   }, [FoodItems, filterValue, hasSearchFilter])
-
-  const rowsPerPage = 8
-  const [page, setPage] = useState(1)
-  const pages = Math.ceil(filteredItems.length / rowsPerPage)
-
-  const items = useMemo(() => {
-    const start = (page - 1) * rowsPerPage
-    const end = start + rowsPerPage
-
-    return filteredItems.slice(start, end)
-  }, [page, filteredItems])
 
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: 'name',
@@ -80,19 +57,18 @@ export default function InventoryTable() {
   })
 
   const sortedItems = useMemo(() => {
-    return [...items].sort((a: FoodItem, b: FoodItem) => {
+    return [...filteredItems].sort((a: FoodItem, b: FoodItem) => {
       const first = a[sortDescriptor.column as keyof FoodItem] as string
       const second = b[sortDescriptor.column as keyof FoodItem] as string
       const cmp = first < second ? -1 : first > second ? 1 : 0
 
       return sortDescriptor.direction === 'descending' ? -cmp : cmp
     })
-  }, [sortDescriptor, items])
+  }, [sortDescriptor, filteredItems])
 
   const onSearchChange = useCallback((value?: string) => {
     if (value) {
       setFilterValue(value)
-      setPage(1)
     } else {
       setFilterValue('')
     }
@@ -100,7 +76,6 @@ export default function InventoryTable() {
 
   const onClear = useCallback(() => {
     setFilterValue('')
-    setPage(1)
   }, [])
 
   const topContent = useMemo(() => {
@@ -125,21 +100,6 @@ export default function InventoryTable() {
   return (
     <Table 
       topContent={topContent}
-      topContentPlacement='outside'
-      bottomContent={
-        <div className='flex w-full justify-center'>
-          <Pagination
-            isCompact
-            // showControls
-            // showShadow
-            color='secondary'
-            page={page}
-            total={pages}
-            onChange={page => setPage(page)}
-          />
-        </div>
-      }
-      //bottomContentPlacement='outside'
       sortDescriptor={sortDescriptor}
       onSortChange={setSortDescriptor}
       classNames={{
