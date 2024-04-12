@@ -24,7 +24,7 @@ export const InventoryForm = () => {
       const res = await fetch("/api/inventory", {
         method: "POST",
         body: JSON.stringify({
-          name,
+          name: name.toLowerCase(),
           quantity,
           userId: session?.user?.id,
         }),
