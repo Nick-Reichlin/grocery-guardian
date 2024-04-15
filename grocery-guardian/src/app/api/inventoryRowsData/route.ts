@@ -3,8 +3,6 @@ import { NextResponse } from 'next/server';
 
 export async function GET(req: any, res: any) {
     try {
-        console.log("In API")
-
         const url = new URL(req.url, 'http://localhost')
         const userID = url.searchParams.get('userID')
 

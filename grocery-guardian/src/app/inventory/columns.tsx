@@ -1,5 +1,7 @@
 import { Tooltip } from "@nextui-org/react"
 import { EditIcon, DeleteIcon} from "@/components/ui/icons"
+import { onEdit, onDelete } from "./function";
+
 
 export type FoodItem = {
     id: number
@@ -61,12 +63,16 @@ export const columns = [
           return (
             <div className="flex items-center gap-2">
               <Tooltip>
-                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50"
+                  onClick={() => onEdit(foodItem.id)}
+                >
                   <EditIcon />
                 </span>
               </Tooltip>
               <Tooltip color="danger">
-                <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                <span className="text-lg text-danger cursor-pointer active:opacity-50"
+                  onClick={() => onDelete(foodItem.id)}
+                >
                   <DeleteIcon />
                 </span>
               </Tooltip>
