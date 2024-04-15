@@ -19,6 +19,9 @@ const Navbar = () => {
                 </Link>
                 <div>
                     <ul className="hidden sm:flex">
+                        <Link href="/upload-receipt">
+                            <li className="ml-10 hover:border-b text-green-600 text-xl">Upload a receipt</li>
+                        </Link>
                         <Link href="/inventory">
                             <li className="ml-10 hover:border-b text-green-600 text-xl">Your Groceries</li>
                         </Link>
