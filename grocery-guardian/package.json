@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "patch-package" 
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -29,6 +30,7 @@
     "lucide-react": "^0.352.0",
     "next": "14.1.0",
     "next-auth": "^4.24.7",
+    "patch-package": "^8.0.0",
     "pdf-parse": "^1.1.1",
     "react": "^18",
     "react-dom": "^18",
@@ -37,6 +39,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/pdf-parse": "^1.1.4",
     "@types/react": "^18.2.75",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
