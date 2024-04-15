@@ -78,7 +78,7 @@ export const columns = [
               </Tooltip>
             </div>
           );
-        default:
-          return cellValue;
+          default:
+            return cellValue as string | number | React.ReactNode;
       }
 }
