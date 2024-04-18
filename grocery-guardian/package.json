@@ -21,6 +21,7 @@
     "@react-pdf/renderer": "^3.4.2",
     "@react-stately/data": "^3.11.2",
     "@types/bcrypt": "^5.0.2",
+    "@types/react-filepond": "^7.1.0",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
