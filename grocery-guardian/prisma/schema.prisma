@@ -26,6 +26,7 @@ model foodItem {
   name          String
   quantity      Int
   expirationDate DateTime?
+  expired       Boolean
   createdAt     DateTime @default(now())
   user          User     @relation(fields: [userID], references: [id])
   userID        Int
