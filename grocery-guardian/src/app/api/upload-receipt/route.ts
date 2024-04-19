@@ -1,23 +1,39 @@
-import { writeFile } from 'fs/promises'
-import { NextRequest, NextResponse } from 'next/server'
+import { writeFile } from 'fs/promises';
+import { NextRequest, NextResponse } from 'next/server';
+//import { createWorker } from 'tesseract.js';
 
 export async function POST(request: NextRequest) {
-  const data = await request.formData()
-  const file: File | null = data.get('file') as unknown as File
+  const data = await request.formData();
+  const file: File | null = data.get('file') as File | null;
 
   if (!file) {
-    return NextResponse.json({ success: false })
+    return new NextResponse(JSON.stringify({ success: false, message: 'No file uploaded' }), { status: 400 });
   }
 
-  const bytes = await file.arrayBuffer()
-  const buffer = Buffer.from(bytes)
+  try {
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
 
-  console.log(`Buffer: ${buffer}`)
-  // With the file data in the buffer, you can do whatever you want with it.
-  // For this, we'll just write it to the filesystem in a new location
-  const path = `/tmp/${file.name}`
-  await writeFile(path, buffer)
-  console.log(`open ${path} to see the uploaded file`)
+    // Initialize tesseract.js worker
+  //   const worker = createWorker();
+  //   await worker.load();
+  //   await worker.loadLanguage('eng');
+  //   await worker.initialize('eng');
 
-  return NextResponse.json({ success: true })
+  //   // Recognize text from the PDF buffer
+  //   const { data: { text } } = await worker.recognize(buffer);
+
+  //   // Save the recognized text to a file (optional)
+  //   const textFilePath = `/tmp/${file.name}.txt`;
+  //   await writeFile(textFilePath, text);
+
+  //   console.log(`Recognized text saved to: ${textFilePath}`);
+
+  //   await worker.terminate();
+
+  //   return new NextResponse(JSON.stringify({ success: true, recognizedText: text, textFilePath }), { status: 200 });
+  // } catch (error) {
+  //   console.error('Error processing file:', error);
+  //   return new NextResponse(JSON.stringify({ success: false, message: 'Error processing file' }), { status: 500 });
+  }
 }
