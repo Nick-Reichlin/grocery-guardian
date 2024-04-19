@@ -33,7 +33,7 @@ export async function GET(req: any, res: any) {
             userID: parseInt(userID as string),
           },
         });
-
+        console.log(foodItems)
         return new NextResponse(JSON.stringify({
             foodItems
         }), {

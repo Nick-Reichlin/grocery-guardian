@@ -8,6 +8,7 @@ export type FoodItem = {
     name: string
     quantity: number
     expirationDate: Date
+    expired: Boolean,
     createdAt: Date
     userID: number
 }
@@ -24,6 +25,10 @@ export const columns = [
     {
       key: "expirationDate",
       label: "EXPIRATION DATE",
+    },
+    {
+      key: "expired",
+      label: "EXPIRED",
     },
     {
       key: "createdAt",
@@ -45,20 +50,26 @@ export const columns = [
             <p className="text-bold text-sm capitalize">{(cellValue).toString()}</p>
           </div>
         );
-      case "quantity":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">{(cellValue).toString()}</p>
-          </div>
+        case "quantity":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-sm capitalize">{(cellValue).toString()}</p>
+            </div>
         );
         case "expirationDate":
           return (
             <span>{new Date(cellValue).toLocaleDateString()}</span>
-          )
+        );
+        case "expired":
+        return (
+          <span style={{ color: cellValue ? 'red' : 'green' }}>
+            {cellValue ? "Expired" : "Fresh"}
+          </span>
+        );
         case "createdAt":
           return (
             <span>{new Date(cellValue).toLocaleDateString()}</span>
-          )
+        );
         case "actions":
           return (
             <div className="flex items-center gap-2">
