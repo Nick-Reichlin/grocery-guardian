@@ -4,5 +4,5 @@ const nextConfig = {
       serverComponentsExternalPackages: ['pdf2json'],
     },
   };
-  
-module.exports = nextConfig;
+
+export default nextConfig;

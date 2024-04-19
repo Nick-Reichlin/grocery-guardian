@@ -1,21 +1,9 @@
 'use client'
 
+import FileUpload from "@/components/fileUpload";
 import Navbar from "@/components/navbar";
-import { useState } from 'react';
 
 export default function ReceiptUpload() {
-    const [parsedData, setParsedData] = useState(null);
-
-    const handleParsePdf = async () => {
-        const res = await fetch('/api/upload-receipt', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        const data = await res.json();
-        setParsedData(data);
-    }
 
     return (
         <main>
@@ -25,13 +13,7 @@ export default function ReceiptUpload() {
                     <h1 className="text-3xl font-bold text-center text-gray-800 mb-8 pb-2">
                         Receipt Upload
                     </h1>
-                    <button onClick={handleParsePdf}>Parse PDF</button>
-                    {parsedData && (
-                        <div>
-                            <h2>Parsed Data</h2>
-                            <pre>{JSON.stringify(parsedData, null, 2)}</pre>
-                        </div>
-                    )}
+                    <FileUpload />
                 </div>
             </div>
         </main>
