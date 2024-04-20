@@ -7,9 +7,9 @@ import { useSession } from "next-auth/react";
 import React from "react";
 import { SearchIcon } from "lucide-react";
 
-async function updateExpiredItems() {
+async function updateExpiredItems(userID: unknown) {
   try {
-    const response = await fetch('/api/', {
+    const response = await fetch(`/api/update-expired`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -22,11 +22,13 @@ async function updateExpiredItems() {
     }
 
     const result = await response.json();
+
     console.log('Expired items updated successfully:', result);
   } catch (error) {
     console.error('Error updating expired items:', error);
   }
 }
+
 function getFoodItems(userID: unknown) {
   const [foodItems, setFoodItems] = useState([]);
   useEffect(() => {
@@ -53,6 +55,7 @@ function getFoodItems(userID: unknown) {
 
 export default function InventoryTable() {
   const { data: session } = useSession();
+  updateExpiredItems(session?.user?.id)
   const FoodItems = getFoodItems(session?.user?.id);
 
   const [filterValue, setFilterValue] = useState('')
