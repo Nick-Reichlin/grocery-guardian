@@ -4,7 +4,6 @@ export const onEdit = (id: number) => {
   
 export const onDelete = async (id: number) => {
   try {
-      console.log('In API')
       const response = await fetch(`/api/delete-item?id=${id}`, {
           method: 'DELETE',
           headers: {
@@ -17,6 +16,7 @@ export const onDelete = async (id: number) => {
       }
 
       console.log(`Item with id ${id} deleted successfully`);
+      alert(`Grocery Item deleted successfully`);
   } catch (error) {
       console.error('Error deleting item:', error);
   }
