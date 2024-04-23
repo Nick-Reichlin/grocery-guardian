@@ -25,9 +25,6 @@ const Navbar = () => {
                         <Link href="/inventory">
                             <li className="ml-10 hover:border-b text-green-600 text-xl">Your Groceries</li>
                         </Link>
-                        <Link href="/grocery-lists">
-                            <li className="ml-10 hover:border-b text-green-600 text-xl">Grocery Lists</li>
-                        </Link>
                         <Link href="/profile">
                             <li className="ml-10 hover:border-b text-green-600 text-xl">Profile</li>
                         </Link>
