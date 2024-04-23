@@ -41,6 +41,7 @@
     "pg": "^8.11.5",
     "react": "^18",
     "react-dom": "^18",
+    "react-modal": "^3.16.1",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "tesseract.js": "^5.0.5",
