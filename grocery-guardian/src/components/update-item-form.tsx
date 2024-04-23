@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,14 +16,20 @@ export const GroceryForm = ({ id }) => {
     useEffect(() => {
         const fetchGroceryItem = async () => {
             try {
-                const response = await fetch(`/api/update-item?id=${id}`, { method: 'GET' });
-                if (response.ok) {
-                    const data = await response.json();
-                    setName(data.name);
-                    setQuantity(data.quantity);
-                    setExpirationDate(data.expirationDate.split('T')[0]); // Assuming the date comes in ISO format
+                const res = await fetch(`/api/update-item?id=${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    } 
+                });
+
+                if (res.ok) {
+                    const { item } = await res.json();
+                    setName(item.name);
+                    setQuantity(item.quantity);
+                    setExpirationDate(item.expirationDate?.split('T')[0]);
                 } else {
-                    const errorData = await response.json();
+                    const errorData = await res.json();
                     throw new Error(errorData.message || 'Failed to fetch grocery data');
                 }
             } catch (error) {
@@ -30,15 +38,16 @@ export const GroceryForm = ({ id }) => {
         };
 
         fetchGroceryItem();
-    }, [id]); // Depend on id to refetch when it changes
+    }, [id]);
 
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`/api/update-item?id=${id}`, {
-                method: 'PUT',
+            const res = await fetch(`/api/update-item`, {
+                method: 'POST',
                 body: JSON.stringify({
+                    id: id,
                     name,
                     quantity,
                     expirationDate
@@ -48,11 +57,11 @@ export const GroceryForm = ({ id }) => {
                 }
             });
 
-            if (response.ok) {
+            if (res.ok) {
                 setSuccess(true);
                 setError(null);
             } else {
-                const errorData = await response.json();
+                const errorData = await res.json();
                 throw new Error(errorData.message);
             }
         } catch (error) {
@@ -62,19 +71,22 @@ export const GroceryForm = ({ id }) => {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6 w-full sm:w-[400px]">
-            <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Update Grocery Item</h1>
+            <h1 className="text-2xl font-bold text-center text-gray-800 mb-8">Edit Grocery Item</h1>
             <div className="grid w-full gap-1.5">
                 <Label htmlFor='name'>Name</Label>
                 <Input
+                    required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     id='name'
                     type="text"
+                    readOnly
                 />
             </div>
             <div className="grid w-full gap-1.5">
                 <Label htmlFor='quantity'>Quantity</Label>
                 <Input
+                    required
                     value={quantity}
                     onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
                     id='quantity'
@@ -84,6 +96,7 @@ export const GroceryForm = ({ id }) => {
             <div className="grid w-full gap-1.5">
                 <Label htmlFor='expirationDate'>Expiration Date</Label>
                 <Input
+                    required
                     value={expirationDate}
                     onChange={(e) => setExpirationDate(e.target.value)}
                     id='expirationDate'
