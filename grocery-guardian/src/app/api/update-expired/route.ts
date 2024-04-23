@@ -21,7 +21,11 @@ export async function PUT(req: Request) {
                 expired: true, // Set expired to true for these items
             },
         });
-        console.log(`${count} items updated`);
+        return new NextResponse(JSON.stringify({
+            message: `${count} items updated`,
+        }), {
+            status: 200,
+        });
     } catch (error) {
         console.error('Error updating expired items:', error);
         return new NextResponse(JSON.stringify({
