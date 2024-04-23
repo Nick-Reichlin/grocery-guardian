@@ -42,7 +42,15 @@ export const columns = [
 
   export const renderCell = (foodItem: FoodItem, columnkey: React.Key) => {
       const cellValue = foodItem[columnkey as keyof FoodItem];
-  
+
+      const tooltipStyle = {
+        backgroundColor: '#ffffff', // Set the background color to white
+        color: '#333',              // Text color for readability
+        padding: '5px 10px',        // Padding around the text
+        borderRadius: '5px',        // Rounded corners for aesthetics
+        boxShadow: '0 2px 10px rgba(0,0,0,0.1)' // Optional: adds shadow for depth
+      };
+
       switch (columnkey) {
         case "name":
         return (
@@ -73,14 +81,14 @@ export const columns = [
         case "actions":
           return (
             <div className="flex items-center gap-2">
-              <Tooltip>
+              <Tooltip content={<div style={tooltipStyle}>Edit</div>}>
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50"
                   onClick={() => onEdit(foodItem.id)}
                 >
                   <EditIcon />
                 </span>
               </Tooltip>
-              <Tooltip color="danger">
+              <Tooltip color="danger" content={<div style={tooltipStyle}>Delete</div>}>
                 <span className="text-lg text-danger cursor-pointer active:opacity-50"
                   onClick={() => onDelete(foodItem.id)}
                 >
