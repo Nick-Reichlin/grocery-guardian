@@ -68,7 +68,7 @@ export const columns = [
         );
         case "expirationDate":
           return (
-            <span>{new Date(cellValue).toLocaleDateString()}</span>
+            <span>{new Date(cellValue).toLocaleDateString('en-US', {timeZone: "UTC"})}</span>
         );
         case "expired":
         return (
@@ -78,7 +78,7 @@ export const columns = [
         );
         case "createdAt":
           return (
-            <span>{new Date(cellValue).toLocaleDateString()}</span>
+            <span>{new Date(cellValue).toLocaleDateString('en-US', {timeZone: "UTC"})}</span>
         );
         case "actions":
           return (
