@@ -21,7 +21,8 @@ export async function POST(req: Request) {
                 data: {
                     name: name,
                     quantity: quantity,
-                    expirationDate: new Date(expirationDate)
+                    expirationDate: new Date(expirationDate),
+
                 }
             });
 
@@ -46,7 +47,6 @@ export async function POST(req: Request) {
 
 export async function GET(req: any) {
     try {
-        console.log("In API")
         const url = new URL(req.url, 'http://localhost');
         const id = url.searchParams.get('id');
 

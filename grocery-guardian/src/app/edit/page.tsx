@@ -3,14 +3,14 @@
 import React, { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { GroceryForm } from "@/components/update-item-form";
-import Navbar from "@/components/navbar";
 
 export default function EditPage() {
     const navigation = useRouter();
 
     const searchParams = useSearchParams()
 
-    const id = searchParams.get('id')
+    const rawID = searchParams.get('id')
+    const id = parseInt(rawID, 10);
 
     useEffect(() => {
         if (!id) {
