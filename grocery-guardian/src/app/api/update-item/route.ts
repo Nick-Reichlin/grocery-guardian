@@ -22,6 +22,7 @@ export async function POST(req: Request) {
                     name: name,
                     quantity: quantity,
                     expirationDate: new Date(expirationDate),
+                    expired: false
 
                 }
             });
