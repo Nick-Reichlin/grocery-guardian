@@ -1,6 +1,6 @@
 import { Tooltip } from "@nextui-org/react"
 import { EditIcon, DeleteIcon} from "@/components/ui/icons"
-import { onEdit, onDelete } from "./function";
+import { onDelete } from "./function";
 import { useNavigation } from "@/components/edit-hook"
 
 export type FoodItem = {
@@ -28,7 +28,7 @@ export const columns = [
     },
     {
       key: "expired",
-      label: "EXPIRED",
+      label: "STATE",
     },
     {
       key: "createdAt",
