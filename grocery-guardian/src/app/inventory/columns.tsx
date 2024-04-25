@@ -1,7 +1,7 @@
 import { Tooltip } from "@nextui-org/react"
 import { EditIcon, DeleteIcon} from "@/components/ui/icons"
 import { onEdit, onDelete } from "./function";
-
+import { useNavigation } from "@/components/edit-hook"
 
 export type FoodItem = {
     id: number
@@ -43,6 +43,8 @@ export const columns = [
   export const renderCell = (foodItem: FoodItem, columnkey: React.Key) => {
       const cellValue = foodItem[columnkey as keyof FoodItem];
 
+      const { navigateToEdit } = useNavigation();
+
       const tooltipStyle = {
         backgroundColor: '#ffffff', // Set the background color to white
         color: '#333',              // Text color for readability
@@ -83,7 +85,7 @@ export const columns = [
             <div className="flex items-center gap-2">
               <Tooltip content={<div style={tooltipStyle}>Edit</div>}>
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50"
-                  onClick={() => {onEdit(foodItem.id)}}
+                  onClick={() => navigateToEdit(foodItem.id)}
                 >
                   <EditIcon />
                 </span>

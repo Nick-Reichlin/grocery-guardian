@@ -1,8 +1,3 @@
-export const onEdit = (id: number) => {
-    
-    console.log(`Editing item with id ${id}`);
-};
-  
 export const onDelete = async (id: number) => {
   try {
       const response = await fetch(`/api/delete-item?id=${id}`, {
