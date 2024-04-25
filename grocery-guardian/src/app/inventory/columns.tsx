@@ -83,7 +83,7 @@ export const columns = [
             <div className="flex items-center gap-2">
               <Tooltip content={<div style={tooltipStyle}>Edit</div>}>
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50"
-                  onClick={() => onEdit(foodItem.id)}
+                  onClick={() => {onEdit(foodItem.id)}}
                 >
                   <EditIcon />
                 </span>
