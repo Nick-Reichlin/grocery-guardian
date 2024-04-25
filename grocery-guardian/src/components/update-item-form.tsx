@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert } from "@/components/ui/alert";
+import router, { useRouter } from "next/navigation";
+
 
 export const GroceryForm = ({ id }) => {
     const [name, setName] = useState('');
@@ -12,6 +14,7 @@ export const GroceryForm = ({ id }) => {
     const [expirationDate, setExpirationDate] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
+    const router = useRouter()
 
     useEffect(() => {
         const fetchGroceryItem = async () => {
@@ -106,6 +109,9 @@ export const GroceryForm = ({ id }) => {
             {error && <Alert>{error}</Alert>}
             {success && <div className="bg-green-200 text-green-800 p-4 rounded-md">Item updated successfully!</div>}
             <Button className='w-full bg-green-800 hover:bg-green-700' size="lg">Update Item</Button>
+            <Button onClick={() => router.back()} className="w-full bg-green-800 hover:bg-green-700" size="sm">
+                Back to Inventory
+            </Button>
         </form>
     );
 }
