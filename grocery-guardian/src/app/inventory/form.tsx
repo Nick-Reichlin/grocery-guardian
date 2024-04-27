@@ -5,10 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Alert } from "@/components/ui/alert";
 import React from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 export const InventoryForm = () => {
-  // const router = useRouter();
 
   const [quantity, setQuantity] = React.useState("");
   const [name, setName] = React.useState("");
