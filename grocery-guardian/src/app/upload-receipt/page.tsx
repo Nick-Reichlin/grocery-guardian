@@ -18,7 +18,11 @@ export default function ReceiptUpload() {
             const response = await fetch(result.files[0].Url);
             const text = await response.text();
             setConvertedText(text);
-            console.log(text);
+            //console.log(text);
+            const pattern = /CASH\r?\n(.*?)(?=\r?\n\s*\r?\n)/s;
+            const match = text.match(pattern);
+            console.log("Regex match:", match[1])
+
         } else {
             console.log("No file selected.");
         }
