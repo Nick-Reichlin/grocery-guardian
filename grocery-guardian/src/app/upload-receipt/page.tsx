@@ -2,30 +2,27 @@
 
 import Navbar from "@/components/navbar";
 import { useState } from "react";
+import ConvertApi from 'convertapi-js'
 
 export default function ReceiptUpload() {
-
-    const [file, setFile] = useState<File>()
+    const [file, setFile] = useState<File>();
+    const [convertedText, setConvertedText] = useState<string>('');
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        if (!file) return
-    
-        try {
-          const data = new FormData()
-          data.set('file', file)
-    
-          const res = await fetch('/api/upload-receipt', {
-            method: 'POST',
-            body: data
-          })
-          // handle the error
-          if (!res.ok) throw new Error(await res.text())
-        } catch (e: any) {
-          // Handle errors here
-          console.error(e)
+        e.preventDefault();
+        if (file) {
+            let convertApi = ConvertApi.auth('OyfZvenizzakKCYt')
+            let params = convertApi.createParams()
+            params.add('file', file)
+            let result = await convertApi.convert('pdf', 'txt', params)
+            const response = await fetch(result.files[0].Url);
+            const text = await response.text();
+            setConvertedText(text);
+            console.log(text);
+        } else {
+            console.log("No file selected.");
         }
-      }
+    }
 
     return (
         <main>
@@ -51,6 +48,6 @@ export default function ReceiptUpload() {
                     </form>
                 </div>
             </div>
-</main>
+        </main>
     );
 }
