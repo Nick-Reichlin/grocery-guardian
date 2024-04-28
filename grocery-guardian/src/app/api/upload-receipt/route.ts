@@ -33,7 +33,7 @@ export async function POST(req: Request) {
         const foodItems = await Promise.all(items.map((item: { name: any; quantity: any; }) =>
             prisma.foodItem.create({
                 data: {
-                    name: item.name,
+                    name: item.name.toLowerCase(),
                     quantity: item.quantity,
                     userID: userIdInt,
                     expirationDate: new Date(), // Assuming you want to set the current date as expiration date for example purposes
