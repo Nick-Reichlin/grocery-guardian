@@ -31,3 +31,9 @@ model foodItem {
   user          User     @relation(fields: [userID], references: [id])
   userID        Int
 }
+
+model expiration {
+  id            Int      @id @default(autoincrement())
+  name          String
+  expirationTime Int
+}
