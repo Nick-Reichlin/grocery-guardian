@@ -3,10 +3,13 @@
 import Navbar from "@/components/navbar";
 import { useState } from "react";
 import ConvertApi from 'convertapi-js'
+import { useSession } from "next-auth/react";
 
 export default function ReceiptUpload() {
     const [file, setFile] = useState<File>();
     const [convertedText, setConvertedText] = useState<string>('');
+    const { data: session } = useSession();
+
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -18,11 +21,33 @@ export default function ReceiptUpload() {
             const response = await fetch(result.files[0].Url);
             const text = await response.text();
             setConvertedText(text);
-            //console.log(text);
             const pattern = /CASH\r?\n(.*?)(?=\r?\n\s*\r?\n)/s;
             const match = text.match(pattern);
-            console.log("Regex match:", match[1])
+            let groceries = match[1]
+            groceries = groceries.replace(/[\r\n]+/g, ",");
+            const postData = {
+                matchedText: groceries,
+                userId: session?.user?.id
+            };
+            console.log(JSON.stringify(postData));
+            try {
+                const res = await fetch("/api/upload-receipt", {
+                    method: "POST",
+                    body: JSON.stringify(postData),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
 
+                if (res.ok) {
+                    console.log("Receipt uploaded successfully!");
+                } else {
+                    const errorData = await res.json();
+                    console.error("Failed to upload data: " + (errorData.error || "Unknown error"));
+                } 
+            } catch (error: any) {
+                    console.error("An error occurred during the request: " + (error.message || "Unknown error"));
+                }
         } else {
             console.log("No file selected.");
         }

@@ -33,7 +33,6 @@ export const InventoryForm = () => {
       if (res.ok) {
         setSuccess(true);
         setError(null);
-        // router.refresh();
       } else {
         setError((await res.json()).error);
       }
