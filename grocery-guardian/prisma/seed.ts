@@ -54,17 +54,17 @@ async function main() {
         { name: 'zucchini', expirationTime: 5 }
     ];
 
-    // Upsert all food items in a single transaction
     await prisma.$transaction(
-        foodItems.map(item => prisma.expiration.upsert({
-            where: { name: item.name },
-            update: { expirationTime: item.expirationTime },
-            create: {
-                name: item.name,
-                expirationTime: item.expirationTime
-            }
-        }))
+      foodItems.map(item => prisma.expiration.upsert({
+        where: { name: item.name },
+        update: { expirationTime: item.expirationTime },
+        create: {
+          name: item.name,
+          expirationTime: item.expirationTime
+        }
+      }))
     );
+    
 }
 
 main()
