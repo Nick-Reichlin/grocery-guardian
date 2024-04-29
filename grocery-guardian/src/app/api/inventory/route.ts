@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     try {
-        const { name, quantity, userId } = await req.json();
+        const { name, quantity, userId, expirationDate } = await req.json();
 
         const quantityInt = parseInt(quantity, 10);
 
@@ -12,8 +12,8 @@ export async function POST(req: Request) {
         const foodItem = await prisma.foodItem.create({
             data: {
                 name,
-                quantity:quantityInt,
-                expirationDate: new Date(),
+                quantity: quantityInt,
+                expirationDate,
                 user: {
                     connect: { id: userIdInt }
                 },

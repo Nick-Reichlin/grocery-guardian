@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Alert } from "@/components/ui/alert";
 import React from "react";
 import { useSession } from "next-auth/react";
+import fetchExpirationDate from "@/components/expiration-calc";
 
 export const InventoryForm = () => {
 
@@ -18,12 +19,19 @@ export const InventoryForm = () => {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const data = await fetchExpirationDate(name);
+
+    console.log(data.expirationDate)
+
+    const expirationDate = new Date(data.expirationDate);
+    
     try {
       const res = await fetch("/api/inventory", {
         method: "POST",
         body: JSON.stringify({
           name: name.toLowerCase(),
           quantity,
+          expirationDate: expirationDate,
           userId: session?.user?.id,
         }),
         headers: {

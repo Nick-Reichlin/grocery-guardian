@@ -1,10 +1,12 @@
 import { PrismaClient } from '@prisma/client';
+import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export default async function handler(req, res) {
-  if (req.method === 'GET') {
-    const { name } = req.query;  // Name is obtained from the URL parameter
+export  async function GET(req: any) {
+    console.log("In API")
+    const url = new URL(req.url, 'http://localhost');
+    const name = url.searchParams.get('name');
 
     try {
       const foodExpiration = await prisma.expiration.findUnique({
@@ -12,24 +14,28 @@ export default async function handler(req, res) {
       });
 
       if (!foodExpiration) {
-        return res.status(404).json({ message: "Food item not found." });
+        return new NextResponse(JSON.stringify({
+            error: "Name parameter is missing"
+        }), {
+            status: 400
+        });
       }
 
       const today = new Date();
       const expirationDate = new Date(today);
       expirationDate.setDate(today.getDate() + foodExpiration.expirationTime);
 
-      res.status(200).json({
+    return new NextResponse(JSON.stringify({
         name: name,
         expirationDate: expirationDate.toISOString()
-      });
-    } catch (error) {
-      console.error("Failed to fetch expiration data:", error);
-      res.status(500).json({ error: "Internal server error" });
+    }), {
+        status: 200
+    });
+    } catch (err: any) {
+        return new NextResponse(JSON.stringify({
+            error: err.message
+        }), {
+            status: 500
+        });
     }
-  } else {
-    // Handle any other HTTP method
-    res.setHeader('Allow', ['GET']);
-    res.status(405).json({ error: `Method ${req.method} Not Allowed` });
-  }
 }

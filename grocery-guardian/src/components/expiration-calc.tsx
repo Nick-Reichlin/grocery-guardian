@@ -1,7 +1,11 @@
-
-async function fetchExpirationDate(foodName) {
+export default async function fetchExpirationDate(foodName: any) {
     try {
-        const response = await fetch(`/api/expiration/${foodName}`);
+        const response = await fetch(`/api/expiration?name=${foodName}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
         const data = await response.json();
 
         if (!response.ok) {
