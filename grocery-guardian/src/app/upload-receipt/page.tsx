@@ -39,11 +39,19 @@ export default function ReceiptUpload() {
             const match = text.match(pattern);
             if (match && match[1]) {
                 let groceries = match[1].replace(/[\r\n]+/g, ",");
+                
+                const items = groceries.split(",").map((item: string) => {
+                    const parts = item.trim().split(" ");
+                    const quantity = parseInt(parts[0], 10);
+                    const name = parts.slice(1).join(" ");
+                    return { name, quantity };
+                });
+
                 const postData = {
                     matchedText: groceries,
                     userId: session?.user?.id
                 };
-    
+                
                 // Post the extracted data to your server
                 const res = await fetch("/api/upload-receipt", {
                     method: "POST",

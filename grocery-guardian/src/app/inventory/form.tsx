@@ -21,8 +21,6 @@ export const InventoryForm = () => {
 
     const data = await fetchExpirationDate(name);
 
-    console.log(data.expirationDate)
-
     const expirationDate = new Date(data.expirationDate);
     
     try {
