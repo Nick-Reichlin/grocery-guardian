@@ -12,4 +12,4 @@ To Start the Database using Docker:
 - Prisma migrate: npx prisma migrate dev -name init
 - View: npx prisma studio
 - Run project: npm run dev
-
+- Seed the database
